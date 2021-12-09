@@ -2,6 +2,7 @@ import os
 import cv2 as cv
 
 import preprocess
+import util
 from image import Image
 
 
@@ -20,3 +21,9 @@ class Model:
                 img_obj = Image(image, true_boxes=images_dict[filepath])
                 images.append(img_obj)
         self.images = images
+
+    def evaluate(self):
+        # TODO: Use util methods here to evaluate model
+        print("Calculating mean average precision?")
+        print("Error: ", 0)
+        pass
