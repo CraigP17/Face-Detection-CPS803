@@ -12,51 +12,51 @@ valid_path_neg = 'validation_set_negatives'
 modelFile = "models/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 configFile = "models/deploy.prototxt"
 
+
 def blur(img, x, y, w, h):
 	updated = img.copy()
-	blurred = cv.GaussianBlur(updated,(75,75),0)
-	updated[y:h,x:w] = blurred[y:h,x:w]
+	blurred = cv.GaussianBlur(updated, (75, 75), 0)
+	updated[y:h, x:w] = blurred[y:h, x:w]
 	return updated
 
 
 class DNN(Model):
 	def __init__(self):
-		Model.__init__(self)
+		super().__init__()
 		self.model = cv.dnn.readNetFromCaffe(configFile, modelFile)
 		self.images = None
 
 	def predict(self):
 		for img in self.images:
-			im_blob = cv.dnn.blobFromImage(cv.resize(img.original,(300,300)), 1.0, (300,300), (104.0, 117.0, 123.0))
+			im_blob = cv.dnn.blobFromImage(cv.resize(img.original, (300, 300)), 1.0, (300, 300), (104.0, 117.0, 123.0))
 			self.model.setInput(im_blob)
 			img.boxes = self.model.forward()
 
-	def drawFaces(self):
+	def draw_faces(self):
 		for im in self.images:
-			h,w = im.original.shape[:2]
+			h, w = im.original.shape[:2]
 			confidence = im.boxes[0, 0, 0, 2]
 			if confidence > 0.95:
-				box = im.boxes[0, 0, 0, 3:7] * np.array([w,h, w,h])
+				box = im.boxes[0, 0, 0, 3:7] * np.array([w, h, w, h])
 				(x, y, x1, y1) = box.astype("int")
-				im.blurred = blur(im.original, x,y,x1,y1)
+				im.blurred = blur(im.original, x, y, x1, y1)
 				cv.imshow("face", im.blurred)
 				cv.waitKey(0)
 
 
+# paths = [valid_path_pos, valid_path_neg]
+# paths = [valid_path_neg]
+# paths = [valid_path_pos]
+# myDNN = DNN()
+# myDNN.read_preprocess()
+# myDNN.predict()
+# myDNN.draw_faces()
 
-# paths = [valid_path_pos,valid_path_neg]
-#paths = [valid_path_neg]
-#paths = [valid_path_pos]
-#myDNN = DNN()
-#myDNN.read_preprocess()
-#myDNN.predict()
-#myDNN.drawFaces()
-
-#with open('./images/boxes.txt') as f:
+# with open('./images/boxes.txt') as f:
 #   lines = f.readlines()
-#print(lines[0])
-#image = cv.imread("./images/0--Parade/0_Parade_marchingband_1_639.jpg")
-#image = cv.rectangle(image, (121,342),(428,699),(255,0,0),2)
+# print(lines[0])
+# image = cv.imread("./images/0--Parade/0_Parade_marchingband_1_639.jpg")
+# image = cv.rectangle(image, (121,342),(428,699),(255,0,0),2)
 
-#cv.imshow("image",image)
-#cv.waitKey(0)
+# cv.imshow("image",image)
+# cv.waitKey(0)
