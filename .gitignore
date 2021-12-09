@@ -1,3 +1,10 @@
+/images.rar
+images/0--Parade
+images/9--Press_Conference
+images/13--Interview
+
+/.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
