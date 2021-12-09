@@ -1,4 +1,7 @@
+import face_recognition
+import numpy as np
 import cv2 as cv
+import os
 import matplotlib.pyplot as plt
 
 import util
@@ -13,26 +16,18 @@ def blur(img, x, y, w, h):
     return updated
 
 
-class HaarCascades(Model):
+class HOG_SVM(Model):
 
     def __init__(self):
         super().__init__()
         self.model = None
         self.images = None
 
-    def train(self):
-        harr_model_path = 'models/haarcascade_frontalface_default.xml'
-        face_cascade = cv.CascadeClassifier(harr_model_path)
-        self.model = face_cascade
-
     def predict(self):
         i = 0
         while i < len(self.images):
             # Detect boxes and save to Image
-            gray_img = cv.cvtColor(self.images[i].original, cv.COLOR_BGR2GRAY)
-            boxes = self.model.detectMultiScale(gray_img,
-                                                scaleFactor=1.3,
-                                                minNeighbors=5)
+            boxes = self.model.face_locations(self.images[i].original)
             self.images[i].bounding_boxes = boxes
 
             if self.images[i].bounding_boxes != ():
@@ -42,21 +37,14 @@ class HaarCascades(Model):
                 # Add blur to image for each detected box
                 blur_img = self.images[i].original.copy()
                 for detected_box in self.images[i].bounding_boxes:
-                    x, y, w, h = detected_box
-                    blur_img = blur(blur_img, x, y, w, h)
+                    a1, a2, a3, a4 = detected_box
+                    blur_img = blur(blur_img, a1, a2, a3, a4)
 
                 # Save blurred image on Image
                 self.images[i].blurred = blur_img
 
-                # Show detected box on image
-                for box in self.images[i].bounding_boxes:
-                    x, y, w, h = box
-                    cv.rectangle(self.images[i].original, (x, y),
-                                 (x + w, y + h), (0, 255, 0), 3)
-                plt.imshow(cv.cvtColor(self.images[i].original, cv.COLOR_BGR2RGB))
-
                 # Display image
-                cv.imshow('blurred', self.images[i].blurred)
+                cv.imshow("Blurred image", self.images[i].blurred)
                 cv.waitKey(0)
 
                 # Break after 10 images for testing
