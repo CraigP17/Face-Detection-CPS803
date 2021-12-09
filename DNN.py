@@ -3,6 +3,7 @@ import numpy as np
 import cv2 as cv
 import os
 import matplotlib.pyplot as plt
+import util
 
 valid_path_pos = 'validation_set_positives'
 valid_path_neg = 'validation_set_negatives'
@@ -35,9 +36,6 @@ class DNN:
 				images.append(img_obj)
 		self.images = images
 
-	def predict2(self):
-		print("123")
-
 	def predict(self):
 		for img in self.images:
 			im_blob = cv.dnn.blobFromImage(cv.resize(img.original,(300,300)), 1.0, (300,300), (104.0, 117.0, 123.0))
@@ -61,7 +59,16 @@ class DNN:
 paths = [valid_path_pos,valid_path_neg]
 #paths = [valid_path_neg]
 #paths = [valid_path_pos]
-myDNN = DNN()
-myDNN.read_preprocess(paths)
-myDNN.predict()
-myDNN.drawFaces()
+#myDNN = DNN()
+#myDNN.read_preprocess(paths)
+#myDNN.predict()
+#myDNN.drawFaces()
+
+#with open('./images/boxes.txt') as f:
+#   lines = f.readlines()
+#print(lines[0])
+#image = cv.imread("./images/0--Parade/0_Parade_marchingband_1_639.jpg")
+#image = cv.rectangle(image, (121,342),(428,699),(255,0,0),2)
+
+#cv.imshow("image",image)
+#cv.waitKey(0)
