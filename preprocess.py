@@ -16,12 +16,13 @@ def read_image_data():
         for line in infile:
             dir_file = line.split('/')
             if len(dir_file) > 1:
+                full_file_path = path_to_images + line.strip()
                 # The line contains a filename
-                if os.path.isfile(path_to_images + line.strip()):
+                if os.path.isfile(full_file_path):
                     # Store the next lines in file under this image name
                     store_filename = True
-                    prev_file_name = line.strip()
-                    image_data_dict[line.strip()] = []
+                    prev_file_name = full_file_path
+                    image_data_dict[full_file_path] = []
                 else:
                     # Ignore data as this file does not exist
                     store_filename = False
@@ -38,6 +39,3 @@ def read_image_data():
                              int(data[2]), int(data[3])])
 
     return image_data_dict
-
-if __name__ == "__main__":
-    read_image_data()
