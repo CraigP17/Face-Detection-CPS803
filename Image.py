@@ -4,3 +4,4 @@ class Image:
 		self.blurred = []
 		self.boxes = []
 		self.trueBox = []
+		self.error = 0
