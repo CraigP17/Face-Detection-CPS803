@@ -23,6 +23,9 @@ class HOG_SVM(Model):
         self.model = None
         self.images = None
 
+    def train(self):
+        self.model = face_recognition
+
     def predict(self):
         i = 0
         while i < len(self.images):

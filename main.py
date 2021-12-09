@@ -1,5 +1,7 @@
 import haar_cascades
 import hog_svm
+import DNN
+import faceDet
 
 if __name__ == "__main__":
 
@@ -14,3 +16,16 @@ if __name__ == "__main__":
     hc.read_preprocess()
     hc.train()
     hc.predict()
+
+    # DNN using opencv with res10 caffe model
+    myDNN = DNN.DNN()
+    myDNN.read_preprocess()
+    myDNN.train()
+    myDNN.predict()
+    myDNN.draw_faces()
+    # DNN using opencv with face_detection caffe model
+    my_face_Det = faceDet.FaceDetDNN()
+    my_face_Det.read_preprocess()
+    my_face_Det.train()
+    my_face_Det.predict()
+    my_face_Det.draw_faces()

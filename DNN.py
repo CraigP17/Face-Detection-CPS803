@@ -23,8 +23,11 @@ def blur(img, x, y, w, h):
 class DNN(Model):
 	def __init__(self):
 		super().__init__()
-		self.model = cv.dnn.readNetFromCaffe(configFile, modelFile)
+		self.model = None
 		self.images = None
+
+	def train(self):
+		self.model = cv.dnn.readNetFromCaffe(configFile, modelFile)
 
 	def predict(self):
 		for img in self.images:
