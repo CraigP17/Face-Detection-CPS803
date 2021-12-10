@@ -37,9 +37,6 @@
 9--Press_Conference/9_Press_Conference_Press_Conference_9_19.jpg
 1
 313 191 238 279 0 0 0 0 1 0
-9--Press_Conference/9_Press_Conference_Press_Conference_9_677.jpg
-1
-144 270 461 623 0 0 0 0 0 0
 9--Press_Conference/9_Press_Conference_Press_Conference_9_54.jpg
 1
 390 110 184 248 0 0 0 0 0 0

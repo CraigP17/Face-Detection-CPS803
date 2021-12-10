@@ -23,7 +23,11 @@ class Model:
         self.images = images
 
     def evaluate(self):
-        # TODO: Use util methods here to evaluate model
-        print("Calculating mean average precision?")
-        print("Error: ", 0)
-        pass
+        util.calcError(self.images)
+        print("Calculating mean average precision")
+        print("map: ", util.mAP(self.images))
+        print("Calculating average coverage")
+        print("avg: ", util.coverageAccuracy(self.images))
+        print()
+        print()
+

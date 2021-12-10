@@ -43,14 +43,5 @@ class FaceDetDNN(Model):
 				box = im.boxes[0, 0, 0, 3:7] * np.array([w, h, w, h])
 				(x, y, x1, y1) = box.astype("int")
 				im.blurred = blur(im.original, x, y, x1, y1)
-				cv.imshow("face", im.blurred)
-				cv.waitKey(0)
 
 
-paths = [valid_path_pos, valid_path_neg]
-# paths = [valid_path_neg]
-# paths = [valid_path_pos]
-myfaceDet = FaceDetDNN()
-myfaceDet.read_preprocess()
-myfaceDet.predict()
-myfaceDet.draw_faces()

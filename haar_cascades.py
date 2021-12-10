@@ -33,15 +33,15 @@ class HaarCascades(Model):
             boxes = self.model.detectMultiScale(gray_img,
                                                 scaleFactor=1.3,
                                                 minNeighbors=5)
-            self.images[i].bounding_boxes = boxes
+            self.images[i].boxes = boxes
 
-            if self.images[i].bounding_boxes != ():
-                print(i, ": Predicted", self.images[i].bounding_boxes)
-                print(i, ": True Box ", self.images[i].true_boxes)
+            if self.images[i].boxes != ():
+                #print(i, ": Predicted", self.images[i].bounding_boxes)
+                #print(i, ": True Box ", self.images[i].true_boxes)
 
                 # Add blur to image for each detected box
                 blur_img = self.images[i].original.copy()
-                for detected_box in self.images[i].bounding_boxes:
+                for detected_box in self.images[i].boxes:
                     x, y, w, h = detected_box
                     blur_img = blur(blur_img, x, y, w, h)
 
@@ -49,17 +49,11 @@ class HaarCascades(Model):
                 self.images[i].blurred = blur_img
 
                 # Show detected box on image
-                for box in self.images[i].bounding_boxes:
+                for box in self.images[i].boxes:
                     x, y, w, h = box
+                    #print("box ",i,": ", box)
                     cv.rectangle(self.images[i].original, (x, y),
                                  (x + w, y + h), (0, 255, 0), 3)
                 plt.imshow(cv.cvtColor(self.images[i].original, cv.COLOR_BGR2RGB))
 
-                # Display image
-                cv.imshow('blurred', self.images[i].blurred)
-                cv.waitKey(0)
-
-                # Break after 10 images for testing
-                if i > 10:
-                    break
             i += 1

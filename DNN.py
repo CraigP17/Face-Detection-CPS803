@@ -7,8 +7,6 @@ import util
 from model import Model
 from image import Image
 
-valid_path_pos = 'validation_set_positives'
-valid_path_neg = 'validation_set_negatives'
 modelFile = "models/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 configFile = "models/deploy.prototxt"
 
@@ -43,23 +41,11 @@ class DNN(Model):
 				box = im.boxes[0, 0, 0, 3:7] * np.array([w, h, w, h])
 				(x, y, x1, y1) = box.astype("int")
 				im.blurred = blur(im.original, x, y, x1, y1)
-				cv.imshow("face", im.blurred)
-				cv.waitKey(0)
-
-
-# paths = [valid_path_pos, valid_path_neg]
-# paths = [valid_path_neg]
-# paths = [valid_path_pos]
-# myDNN = DNN()
-# myDNN.read_preprocess()
-# myDNN.predict()
-# myDNN.draw_faces()
-
-# with open('./images/boxes.txt') as f:
-#   lines = f.readlines()
-# print(lines[0])
-# image = cv.imread("./images/0--Parade/0_Parade_marchingband_1_639.jpg")
-# image = cv.rectangle(image, (121,342),(428,699),(255,0,0),2)
-
-# cv.imshow("image",image)
-# cv.waitKey(0)
+				# show = cv.rectangle(im.blurred, (x, y),(x1, y1), (0, 255, 0), 3)
+				# a,b,c,d = im.true_boxes[0]
+				# show = cv.rectangle(im.blurred, (a,b),(a+c,b+d),(255,0,0),3)
+				# print(box)
+				# print(im.true_boxes)
+				# cv.imshow('lines',show)
+				# cv.waitKey(0)
+		
