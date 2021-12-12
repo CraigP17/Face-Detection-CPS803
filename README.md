@@ -1,7 +1,9 @@
 # Face-Detection-CPS803
 
 ## Step 1:
-~~~conda activate```
+~~~
+conda activate
+```
 
 ## Step 2:
 Unzip the archive for images
