@@ -2,6 +2,7 @@
 
 ## Step 1:
 ~~~conda activate```
+
 ## Step 2:
 Unzip the archive for images
 
