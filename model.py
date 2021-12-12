@@ -27,7 +27,7 @@ class Model:
         print("Calculating mean average precision")
         print("map: ", util.mAP(self.images))
         print("Calculating average coverage")
-        print("avg: ", util.coverageAccuracy(self.images))
+        print("avg accuracy: ", util.coverageAccuracy(self.images))
         print("Calculating false positive rate")
         print("fp: ", util.fpr(self.images))
         print()
