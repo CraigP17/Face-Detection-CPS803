@@ -48,12 +48,4 @@ class HaarCascades(Model):
                 # Save blurred image on Image
                 self.images[i].blurred = blur_img
 
-                # Show detected box on image
-                for box in self.images[i].boxes:
-                    x, y, w, h = box
-                    #print("box ",i,": ", box)
-                    cv.rectangle(self.images[i].original, (x, y),
-                                 (x + w, y + h), (0, 255, 0), 3)
-                plt.imshow(cv.cvtColor(self.images[i].original, cv.COLOR_BGR2RGB))
-
             i += 1
