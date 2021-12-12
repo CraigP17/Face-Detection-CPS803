@@ -52,14 +52,23 @@ def mAP(images):
 		elif (im.error < 0.5):
 			FP += 1
 
-	return (TP / (TP+FP))
+	return (TP / (TP+FP +1e-16))
+
+def fpr(images):
+	threshold = 0.5
+	TP = 0
+	FP = 0
+	#precision = TP / (TP + FP)
+	for im in images:
+		if (im.error < 0.5):
+			FP += 1
+
+	return (FP / (len(images) +1e-16))
 
 def coverageAccuracy(images):
 	total = 0
-	count = 0
+	count = 1
 	for im in images:
 		total += im.error
 		count += 1
 	return total / count
-	
-
