@@ -17,5 +17,5 @@ Our code runs of main.py, each model inherits from the Model class (model.py) an
 util.py and preprocess.py deal with image and model metrics related functions
 We also have a demo application that runs on webcam as demo_webcamapp.py
 
-# Dataset Acknowledgment
+## Dataset Acknowledgment
 The dataset included is a truncated version of the dataset taken from the Wider Faces provided by the multimedia laboratory of the Department of Information Engineering from The Chinese University of Hong Kong
