@@ -1,4 +1,4 @@
-name: DNN
+name: face-detection
 channels:
   - defaults
 dependencies:
