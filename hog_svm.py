@@ -76,7 +76,7 @@ class HOG_SVM(Model):
                 pr = self.images[i].original
                 for detected_box in self.images[i].boxes:
                     # Show image with predicted bounding box
-                    (x, y, x1, y1) = detected_box.astype("int")
+                    (x, y, x1, y1) = detected_box
                     pr = cv.rectangle(self.images[i].original, (x,y),(x+x1,y+y1),(0,255,0),3)
                 cv.imshow('Predicted', pr)
                 cv.waitKey(0)
